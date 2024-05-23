@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informații Personale</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Stefanut Brasov</div>
+        <div class="nav-links">
+            <a href="index.html">Acasă</a>
+            <a href="create-post.html">Creare Postare</a>
+            <a href="info.html">Informații Personale</a>
+            <a href="login.html">Login</a>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Informații Personale</h2>
+        <div id="user-info">
+            <!-- Informațiile utilizatorului vor fi încărcate aici -->
+        </div>
+    </div>
+    <script>
+        async function loadUserInfo() {
+            const response = await fetch('/api/user-info');
+            if (response.ok) {
+                const userInfo = await response.json();
+                document.getElementById('user-info').innerHTML = `
+                    <p><strong>Username:</strong> ${userInfo.username}</p>
+                    <p><strong>Info:</strong> ${userInfo.info}</p>
+                `;
+            } else {
+                document.getElementById('user-info').innerHTML = '<p>Nu sunteți autentificat.</p>';
+            }
+        }
+
+        loadUserInfo();
+    </script>
+</body>
+</html>
